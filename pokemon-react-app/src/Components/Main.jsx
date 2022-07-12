@@ -2,25 +2,23 @@ import React from "react";
 import Card from "./Card";
 import Pokeinfo from "./Pokeinfo";
 import axios from "axios";
-
 import { useState } from "react";
 import { useEffect } from "react";
 import Pagination from "./Pagination";
 
-const Main = () => {
+const Main=()=>{
     const [pokeData,setPokeData]=useState([]);
     const [loading,setLoading]=useState(true);
-    const url="https://pokeapi.co/api/v2/pokemon";
+    const url="https://pokeapi.co/api/v2/pokemon"
+
     const [pokeDex,setPokeDex]=useState();
     const [sortName,setSortName]=useState(false);
     const [sortHeight,setSortHeight]=useState(false);
     const [sortWeight,setSortWeight]=useState(false);
+    const [search,setSearch]=useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
     const [dataPerPage, setDataPerPage] = useState(10);
-
-
-    const [search,setSearch]=useState("");
 
     {/* fetching inital data */}
     const pokeFun=async()=>{
@@ -31,7 +29,6 @@ const Main = () => {
     }
     {/* Getting details for each pokemon */}
     const getPokemon=async(res)=>{
-        console.log("inital res",res);
         let a=[];
 
        res.map(async(item)=>{
@@ -41,17 +38,17 @@ const Main = () => {
               a.sort((c,b)=>c.id>b.id?1:-1);
           })
           setPokeData(a);
-    }
+    }  
     {/* Search function */}
     const searchByName=async(search)=>{
-        try {
-            const res = await fetch(url+`/${search.toLowerCase()}`);
-            const data = await res.json();
-            setPokeDex(data);
-             } catch (e) {
-                 console.log("err", e);
-                 setPokeDex([]);
-             }
+               try {
+                   const res = await fetch(url+`/${search.toLowerCase()}`);
+                   const data = await res.json();
+                   setPokeDex(data);
+                    } catch (e) {
+                        console.log("err", e);
+                        setPokeDex([]);
+                    }
     };
     {/* Sorting function */}
     const sortingName = () =>{
@@ -77,10 +74,10 @@ const Main = () => {
         pokeData.sort((c,b)=>c.weight>b.weight?1:-1)
         return pokeData
     }
+    
     useEffect(()=>{   
         pokeFun();
     },[])
-
 
     // Get current data used for pagination
     const indexOfLastPost = currentPage * dataPerPage;
@@ -89,7 +86,7 @@ const Main = () => {
 
     // Change page in pagination
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    return (
+    return(
         <>
         <h1 className="title">Welcome to Pokemon</h1>
         <div className="features">
@@ -99,7 +96,6 @@ const Main = () => {
             <button onClick={()=>sortingHeight()}>Sort By Height</button>
             {/* Sorting by Name */}
             <button onClick={()=>sortingName()}>Sort By Name</button>
-            
             {/* Search */}
             <input
                 type="text"
@@ -132,14 +128,15 @@ const Main = () => {
                 paginate={paginate}
             />
         </div>
+        {/* Page render */}
         <div className="container">
             {/* Left side pokemon list */}
             <div className="left-content">
-            <Card pokemon={pokeData} loading={loading} infoPokemon={poke=>setPokeDex(poke)}/>
+                <Card pokemon={currentData} loading={loading} infoPokemon={poke=>setPokeDex(poke)}/>
             </div>
             {/* Right side pokemon detail */}
             <div className="right-content">
-            <Pokeinfo data={pokeDex}/>
+                <Pokeinfo data={pokeDex}/>
             </div>
         </div>
         {/* Down Pagination */}
