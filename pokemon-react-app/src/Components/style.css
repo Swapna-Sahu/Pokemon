@@ -76,6 +76,40 @@ body{
     margin-left: 1rem;
     margin-bottom: 1rem;
 }
+
+.base-stat{
+    margin-top: 1rem;
+}
+
+.btn-group{
+    display: flex;
+}
+
+.btn-group button{
+    outline: none;
+    border: none;
+    width: 150px;
+    padding: 0.3rem 0;
+    margin: 1rem;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    background-color: #b74555;
+    border-radius: 8px;
+}
+
+.features{
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+    margin-top: 10px;
+}
+
+.features button{
+    margin:0 20px;
+    padding: 5px 10px;
+}
+
 .pagination-center{
     justify-content: center;
 }

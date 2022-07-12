@@ -16,6 +16,9 @@ const Main = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [dataPerPage, setDataPerPage] = useState(10);
 
+
+    const [search,setSearch]=useState("");
+
     {/* fetching inital data */}
     const pokeFun=async()=>{
         setLoading(true)
@@ -36,6 +39,17 @@ const Main = () => {
           })
           setPokeData(a);
     }
+    {/* Search function */}
+    const searchByName=async(search)=>{
+        try {
+            const res = await fetch(url+`/${search.toLowerCase()}`);
+            const data = await res.json();
+            setPokeDex(data);
+             } catch (e) {
+                 console.log("err", e);
+                 setPokeDex([]);
+             }
+    };
     useEffect(()=>{   
         pokeFun();
     },[])
@@ -51,6 +65,23 @@ const Main = () => {
     return (
         <>
         <h1 className="title">Welcome to Pokemon</h1>
+        <div className="features">
+            
+            {/* Search */}
+            <input
+                type="text"
+                placeholder="Search by Name or Id"
+                aria-label="Search"
+                onChange={(e) => {
+                
+                    e.preventDefault();
+                    setSearch(e.target.value);
+                
+                }}        
+            />
+            <button onClick={()=>searchByName(search)}>Submit</button>
+            
+        </div>
         {/* Top pagination */}
         <div className="mt-4">
             <Pagination
