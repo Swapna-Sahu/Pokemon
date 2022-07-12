@@ -3,22 +3,44 @@ import React from "react";
 const Pokeinfo = ({ data }) => {
     return (
         <>
-                    <h1>name</h1>
-                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg`} alt="image"  height={150}  width={150}/>
+        {
+            (!data) ? "" : (
+                <>
+                    <h1>{data.name}</h1>
+                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`} alt={data.name}  height={150}  width={150}/>
                     <div className="abilities">
+                        {
+                            data.abilities.map(poke=>{
                                 return(
                                     <>
                                      <div className="group">
-                                        <h2>ability</h2>
+                                        <h2>{poke.ability.name}</h2>
                                     </div>
                                     </>
                                 )
+                            })
+                        }
                     </div>
 
                     <div>
-                    <h3>Height : 10</h3>
-                    <h3>Weight : 20</h3>
+                    <h3>Height : {data.height}</h3>
+                    <h3>Weight : {data.weight}</h3>
                     </div>
+
+                    <div className="base-stat">
+                        {
+                            data.stats.map(poke=>{
+                                return(
+                                    <>
+                                        <p>{poke.stat.name}:{poke.base_stat}</p>
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
+                </>
+            )
+        }
 
         </>
     )
