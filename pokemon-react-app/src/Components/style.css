@@ -76,3 +76,6 @@ body{
     margin-left: 1rem;
     margin-bottom: 1rem;
 }
+.pagination-center{
+    justify-content: center;
+}

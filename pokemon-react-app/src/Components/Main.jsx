@@ -5,12 +5,16 @@ import axios from "axios";
 
 import { useState } from "react";
 import { useEffect } from "react";
+import Pagination from "./Pagination";
 
 const Main = () => {
     const [pokeData,setPokeData]=useState([]);
     const [loading,setLoading]=useState(true);
     const url="https://pokeapi.co/api/v2/pokemon";
     const [pokeDex,setPokeDex]=useState();
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [dataPerPage, setDataPerPage] = useState(10);
 
     {/* fetching inital data */}
     const pokeFun=async()=>{
@@ -35,9 +39,26 @@ const Main = () => {
     useEffect(()=>{   
         pokeFun();
     },[])
+
+
+    // Get current data used for pagination
+    const indexOfLastPost = currentPage * dataPerPage;
+    const indexOfFirstPost = indexOfLastPost - dataPerPage;
+    const currentData = pokeData.slice(indexOfFirstPost, indexOfLastPost);
+
+    // Change page in pagination
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
         <>
         <h1 className="title">Welcome to Pokemon</h1>
+        {/* Top pagination */}
+        <div className="mt-4">
+            <Pagination
+                dataPerPage={dataPerPage}
+                totalData={pokeData.length}
+                paginate={paginate}
+            />
+        </div>
         <div className="container">
             {/* Left side pokemon list */}
             <div className="left-content">
@@ -47,6 +68,14 @@ const Main = () => {
             <div className="right-content">
             <Pokeinfo data={pokeDex}/>
             </div>
+        </div>
+        {/* Down Pagination */}
+        <div className="ms-4">
+            <Pagination
+                dataPerPage={dataPerPage}
+                totalData={pokeData.length}
+                paginate={paginate}
+            />
         </div>
         </>
     )
