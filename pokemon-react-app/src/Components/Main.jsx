@@ -80,7 +80,16 @@ const Main = () => {
                 }}        
             />
             <button onClick={()=>searchByName(search)}>Submit</button>
-            
+            {/*  Page Limit */}
+            <select
+                placeholder="Number of cards/page"
+                id="select-id"
+                onChange={(e) => setDataPerPage(e.target.value)}
+            >
+                <option value="10">10 cards/page</option>
+                <option value="20">20 cards/page</option>
+                <option value="50">50 cards/page</option>
+            </select>
         </div>
         {/* Top pagination */}
         <div className="mt-4">
