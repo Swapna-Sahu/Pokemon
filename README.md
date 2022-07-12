@@ -20,11 +20,11 @@ ReactJs , Axios, Javascript, CSS
 
 ## About project
 You can find :
-Search bar - enter name or id of pokeman, it will display in right side of page 
-Sorting by name,height and weight - it will show in left side of page
-Data per page - Having dropdown to choose 10,20,50 datas.
-Paginations at the top and bottom of the page 
+1. Search bar - enter name or id of pokeman, it will display in right side of page .
+2. Sorting by name,height and weight - it will show in left side of page.
+3. Data per page - Having dropdown to choose 10,20,50 datas.
+4. Paginations at the top and bottom of the page .
 
 ## Need to add below tasks
-cypress e2e test code.
-storing data in local storage and get data from it whenever it renders data instead of using through useEffect.
+1. cypress e2e test code.
+2. storing data in local storage and get data from it whenever it renders data instead of using through useEffect.
