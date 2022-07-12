@@ -12,6 +12,9 @@ const Main = () => {
     const [loading,setLoading]=useState(true);
     const url="https://pokeapi.co/api/v2/pokemon";
     const [pokeDex,setPokeDex]=useState();
+    const [sortName,setSortName]=useState(false);
+    const [sortHeight,setSortHeight]=useState(false);
+    const [sortWeight,setSortWeight]=useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [dataPerPage, setDataPerPage] = useState(10);
@@ -50,6 +53,30 @@ const Main = () => {
                  setPokeDex([]);
              }
     };
+    {/* Sorting function */}
+    const sortingName = () =>{
+        setSortName(true);
+        setSortHeight(false);
+        setSortWeight(false);
+        pokeData.sort((c,b)=>c.name>b.name?1:-1)
+        return pokeData
+    }
+
+    const sortingHeight = () =>{
+        setSortHeight(true);
+        setSortName(false);
+        setSortWeight(false);
+        pokeData.sort((c,b)=>c.height>b.height?1:-1)
+        return pokeData
+    }
+
+    const sortingWeight = () =>{
+        setSortHeight(false);
+        setSortName(false);
+        setSortWeight(true);
+        pokeData.sort((c,b)=>c.weight>b.weight?1:-1)
+        return pokeData
+    }
     useEffect(()=>{   
         pokeFun();
     },[])
@@ -66,6 +93,12 @@ const Main = () => {
         <>
         <h1 className="title">Welcome to Pokemon</h1>
         <div className="features">
+            {/* Sorting by Weight */}
+            <button onClick={()=>sortingWeight()}>Sort By Weight</button>
+            {/* Sorting by Height */}
+            <button onClick={()=>sortingHeight()}>Sort By Height</button>
+            {/* Sorting by Name */}
+            <button onClick={()=>sortingName()}>Sort By Name</button>
             
             {/* Search */}
             <input
