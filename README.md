@@ -14,14 +14,14 @@ Pokemon website
 ReactJs , Axios, Javascript, CSS
 
 ## Project setup
-1. Clone the repo (pokemon-react-app)
+1. Clone the repo and go to pokemon-react-app folder
 2. run npm install
 3. run npm start
 
 ## About project
 You can find :
 1. Search bar - enter name or id of pokeman, it will display in right side of page .
-2. Sorting by name,height and weight - it will show in left side of page.
+2. Sorting by name,height and weight - it will show in left side of the page.
 3. Data per page - Having dropdown to choose 10,20,50 datas.
 4. Paginations at the top and bottom of the page .
 
